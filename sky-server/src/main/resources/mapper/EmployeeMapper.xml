@@ -11,4 +11,14 @@
         </where>
         order by create_time desc
     </select>
+    <update id="startOrStop" parameterType="Employee">
+        update sky_take_out.employee
+        <set>
+            <if test="name!=null and name!=''">name=#{name}</if>
+            <if test="username!=null and username!=''">username=#{username}</if>
+            <if test="status!=null">status=#{status}</if>
+            <if test="password!=null and password!=''">password=#{password}</if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

@@ -32,4 +32,6 @@ public interface EmployeeMapper {
      * @return
      */
     Page<Employee> pageQuery(EmployeePageQueryDTO employeePageQueryDTO);
+
+    void startOrStop(Employee employee);
 }
