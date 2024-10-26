@@ -26,6 +26,19 @@ import java.time.LocalDateTime;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
+    /**
+     * 修改员工信息
+     * @param employeeDTO
+     */
+    @Override
+    public void update(EmployeeDTO employeeDTO) {
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO, employee);
+        employee.setUpdateTime(LocalDateTime.now());
+        employee.setUpdateUser(BaseContext.getCurrentId());
+        employeeMapper.update(employee);
+    }
+
     @Autowired
     private EmployeeMapper employeeMapper;
 
@@ -102,7 +115,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .id(id)
                 .status(status)
                 .build();
-        employeeMapper.startOrStop(employee);
+        employeeMapper.update(employee);
+    }
+
+    @Override
+    public Employee getById(Integer id) {
+       Employee employee= employeeMapper.getById(id);
+       employee.setPassword("****");
+       return employee;
     }
 
 }

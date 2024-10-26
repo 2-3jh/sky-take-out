@@ -15,7 +15,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -112,6 +111,25 @@ public class EmployeeController {
     public Result startOrStop(@PathVariable("status") Integer status,int id){
         log.info("启用禁用用户，状态{}，id{}", status, id);
         employeeService.startOrStop(status,id);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据id获取员工信息")
+    public Result<Employee> getById(@PathVariable("id") Integer id){
+        log.info("通过id查询员工，id:{}",id);
+        Employee employee=employeeService.getById(id);
+        return Result.success(employee);
+    }
+
+    /**
+     * 编辑员工信息
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息");
+        employeeService.update(employeeDTO);
         return Result.success();
     }
 }
