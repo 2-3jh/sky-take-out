@@ -7,7 +7,6 @@ import com.sky.result.Result;
 import com.sky.service.DishService;
 import com.sky.vo.DishVO;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +59,28 @@ public class DishController {
     public Result delete(@RequestParam List<Long> ids){
         log.info("删除菜品{}，ids");
         dishService.deleteBatch(ids);
+        return Result.success();
+    }
+    /**
+     * 获取菜品信息
+     */
+    @ApiOperation("跟据id查询菜品信息")
+    @GetMapping("/{id}")
+    public Result<DishVO> findById(@PathVariable Long id){
+        log.info("根据id查询菜品信息：{}",id);
+        DishVO dishVO=dishService.getDishAndFlavorsById(id);
+        return Result.success(dishVO);
+    }
+
+
+    /**
+     * 更新菜品信息
+     * @return
+     */
+    @ApiOperation("更新菜品信息")
+    @PutMapping
+    public Result update(@RequestBody DishDTO dishDTO){
+        dishService.updateWithFlavor(dishDTO);
         return Result.success();
     }
 }
