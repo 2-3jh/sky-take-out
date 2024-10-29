@@ -5,6 +5,7 @@ import com.sky.annotation.AutoFill;
 import com.sky.dto.DishPageQueryDTO;
 import com.sky.entity.Dish;
 import com.sky.enumeration.OperationType;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -33,4 +34,11 @@ public interface DishMapper {
      * @return
      */
     Page pageQuery(DishPageQueryDTO dishPageQueryDTO);
+
+
+    @Select("select status from sky_take_out.dish where id=#{id}")
+    int getstatus(long id);
+
+    @Delete("Delete from sky_take_out.dish where id=#{id}")
+    void deteleById(Long id);
 }
