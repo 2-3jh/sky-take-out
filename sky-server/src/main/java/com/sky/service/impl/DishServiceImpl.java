@@ -101,6 +101,12 @@ public class DishServiceImpl implements DishService {
 
     }
 
+    @Override
+    public List<DishVO> getByCategoryId(Long categoryId) {
+        List<DishVO> list = dishMapper.getByCategoryId(categoryId);
+        return list;
+    }
+
 
     /**
      * 新增菜品
