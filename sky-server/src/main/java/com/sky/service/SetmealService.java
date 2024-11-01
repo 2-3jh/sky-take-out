@@ -7,6 +7,8 @@ import com.sky.entity.Setmeal;
 import com.sky.result.PageResult;
 import com.sky.vo.SetmealVO;
 
+import java.util.List;
+
 public interface SetmealService {
 
     /**
@@ -19,4 +21,8 @@ public interface SetmealService {
     PageResult page(SetmealPageQueryDTO setmealPageQueryDTO);
 
     void updateStatus(long id, Integer status);
+
+    void deteleBatch(List<Long> ids);
+
+    void update(SetmealDTO setmealDTO);
 }

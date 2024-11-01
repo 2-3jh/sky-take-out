@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * 菜品相关接口
  */
@@ -73,4 +75,28 @@ public class SetmealController {
         return Result.success();
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     */
+    @ApiOperation("批量删除")
+    @DeleteMapping
+    public Result deleteBatch(@RequestParam  List<Long> ids){
+        log.info("批量删除{}",ids);
+        setmealService.deteleBatch(ids);
+        return Result.success();
+    }
+
+    /**
+     * 更新套餐
+     * @param setmealDTO
+     * @return
+     */
+    @ApiOperation("更新菜品")
+    @PutMapping
+    public Result update(@RequestBody  SetmealDTO setmealDTO) {
+        log.info("更新菜品{}",setmealDTO);
+        setmealService.update(setmealDTO);
+        return Result.success();
+    }
 }
